@@ -18,7 +18,7 @@ const CustomerContainer = () => {
 
   const renderBody = () => {
     const Customer = isEdit ? CustomerEdit : CustomerData
-    return <Customer {...currentCustomer} />
+    return <Customer initialValues={currentCustomer} />
   }
 
   return (

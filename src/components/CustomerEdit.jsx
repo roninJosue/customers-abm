@@ -1,11 +1,25 @@
 import React from 'react';
+import {Field, reduxForm} from "redux-form";
 import PropTypes from 'prop-types';
 
 const CustomerEdit = ({name, dni, age}) => {
   return (
     <div>
       <h2>Customer Edit</h2>
-      <h3>Name: {name} / Deni: {dni} / Age: {age}</h3>
+      <form action="">
+        <div>
+          <label htmlFor="name">Name</label>
+          <Field name='name' component='input' type='text'/>
+        </div>
+        <div>
+          <label htmlFor="dni">DNI</label>
+          <Field name='dni' component='input' type='text'/>
+        </div>
+        <div>
+          <label htmlFor="age">Age</label>
+          <Field name='age' component='input' type='number'/>
+        </div>
+      </form>
     </div>
   );
 };
@@ -16,4 +30,4 @@ CustomerEdit.propTypes = {
   age: PropTypes.number
 };
 
-export default CustomerEdit;
+export default reduxForm({form: 'CustomerEdit'})(CustomerEdit);
