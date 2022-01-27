@@ -1,0 +1,79 @@
+{
+  "customers": [
+    {
+      "dni": "121212",
+      "name": "Rey",
+      "age": 33
+    },
+    {
+      "dni": "121214",
+      "name": "Rolando",
+      "age": 9
+    },
+    {
+      "dni": "121215",
+      "name": "Eli",
+      "age": 8
+    },
+    {
+      "dni": "121216",
+      "name": "Jazmin",
+      "age": 8
+    },
+    {
+      "dni": "803-76-6649",
+      "name": "Saxe",
+      "age": 43
+    },
+    {
+      "dni": "235-04-7861",
+      "name": "Beryl",
+      "age": 60
+    },
+    {
+      "dni": "608-27-4446",
+      "name": "Loria",
+      "age": 47
+    },
+    {
+      "dni": "654-92-0634",
+      "name": "Herrick",
+      "age": 43
+    },
+    {
+      "dni": "795-99-4822",
+      "name": "Adi",
+      "age": 98
+    },
+    {
+      "dni": "415-09-2158",
+      "name": "Erroll",
+      "age": 1
+    },
+    {
+      "dni": "269-66-8703",
+      "name": "Thatch",
+      "age": 4
+    },
+    {
+      "dni": "429-65-1384",
+      "name": "Noel",
+      "age": 94
+    },
+    {
+      "dni": "497-81-1461",
+      "name": "Maisey",
+      "age": 39
+    },
+    {
+      "dni": "264-27-0316",
+      "name": "Elset",
+      "age": 88
+    },
+    {
+      "dni": "674-04-1766",
+      "name": "Janie",
+      "age": 16
+    }
+  ]
+}
