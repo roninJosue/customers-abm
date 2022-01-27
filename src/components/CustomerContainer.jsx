@@ -1,19 +1,25 @@
 import React from 'react';
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
 import Frame from "./Frame";
-import {Route, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {getCustomersByDni} from "../selectors/customers";
+import CustomerEdit from "./CustomerEdit";
+import CustomerData from "./CustomerData";
 
 
-const CustomerContainer = ({customer}) => {
+const CustomerContainer = () => {
+
+  const {pathname} = useLocation()
+  const isEdit = pathname.includes('edit')
 
   const {dni} = useParams()
-  const currentCustomer = customer()(dni)
+  const currentCustomer = useSelector(state => getCustomersByDni(state, dni))
 
-  const renderBody = () => (
-    <p>Form</p>
-  )
+  const renderBody = () => {
+    const Customer = isEdit ? CustomerEdit : CustomerData
+    return <Customer {...currentCustomer} />
+  }
 
   return (
     <>
@@ -28,14 +34,4 @@ const CustomerContainer = ({customer}) => {
 };
 
 
-const mapStateToProps = (state) => (
-  {
-    customer: () => {
-      return function (dni) {
-        return getCustomersByDni(state, dni)
-      }
-    }
-  }
-)
-
-export default connect(mapStateToProps, null)(CustomerContainer)
+export default CustomerContainer

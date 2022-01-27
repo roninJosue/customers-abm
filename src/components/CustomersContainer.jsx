@@ -1,18 +1,19 @@
 import React, {useEffect} from 'react';
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Frame from "./Frame";
 import CustomersList from "./CustomersList";
 import CustomersActions from "./CustomersActions";
 import {useNavigate} from "react-router-dom";
-import {fetchCustomers} from "../actions/fetchCustomers";
+import * as actions from '../actions/fetchCustomers'
 import {getCustomers} from "../selectors/customers";
 
-const CustomersContainer = ({fetchCustomers, customers}) => {
+const CustomersContainer = () => {
+  const customers = useSelector(getCustomers)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchCustomers()
-  }, [fetchCustomers])
+    dispatch(actions.fetchCustomers())
+  }, [dispatch])
 
   const navigate = useNavigate()
   const handleAddNew = () => {
@@ -40,17 +41,9 @@ const CustomersContainer = ({fetchCustomers, customers}) => {
   );
 };
 
-CustomersContainer.propTypes = {
-  fetchCustomers: PropTypes.func.isRequired,
-  customers: PropTypes.array.isRequired
-};
 
 CustomersContainer.defaultProps = {
   customers: []
 }
 
-const mapStateToProps = state => ({
-  customers: getCustomers(state)
-})
-
-export default connect(mapStateToProps, {fetchCustomers})(CustomersContainer);
+export default CustomersContainer;

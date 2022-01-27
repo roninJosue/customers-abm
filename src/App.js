@@ -6,7 +6,6 @@ import CustomerContainer from "./components/CustomerContainer";
 function App() {
   const customerNew = () => <h1>Customer NEW</h1>
   const notFound = () => <h1>Not Found</h1>
-  const edit = () => <h1>Edit</h1>
 
   return (
     <Router>
@@ -14,7 +13,7 @@ function App() {
         <Route path='/' element={<HomeContainer />} />
         <Route exact path='/customers' element={<CustomersContainer />}/>
         <Route path='/customers/:dni' element={<CustomerContainer />}/>
-        <Route path='/customers/:dni/edit' element={edit()}/>
+        <Route path='/customers/:dni/edit' element={<CustomerContainer />}/>
         <Route path='/customers/new' element={customerNew()}/>
         <Route path='*' element={notFound()} />
       </Routes>
