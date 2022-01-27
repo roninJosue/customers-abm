@@ -6,6 +6,7 @@ import CustomersList from "./CustomersList";
 import CustomersActions from "./CustomersActions";
 import {useNavigate} from "react-router-dom";
 import {fetchCustomers} from "../actions/fetchCustomers";
+import {getCustomers} from "../selectors/customers";
 
 const CustomersContainer = ({fetchCustomers, customers}) => {
 
@@ -48,4 +49,8 @@ CustomersContainer.defaultProps = {
   customers: []
 }
 
-export default connect(null, {fetchCustomers})(CustomersContainer);
+const mapStateToProps = state => ({
+  customers: getCustomers(state)
+})
+
+export default connect(mapStateToProps, {fetchCustomers})(CustomersContainer);
