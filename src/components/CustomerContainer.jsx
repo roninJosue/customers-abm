@@ -27,7 +27,7 @@ const CustomerContainer = () => {
   const handleSubmit = values => {
     console.log(JSON.stringify(values))
     const {id} = values
-    dispatch(updateCustomer(id, values))
+    return dispatch(updateCustomer(id, values))
   }
 
   const handleOnBack = () => {
@@ -37,7 +37,12 @@ const CustomerContainer = () => {
 
   const renderBody = () => {
     const Customer = isEdit ? CustomerEdit : CustomerData
-    return <Customer {...currentCustomer} onSubmit={handleSubmit} onBack={handleOnBack}/>
+    return <Customer
+      {...currentCustomer}
+      onSubmit={handleSubmit}
+      onBack={handleOnBack}
+      onSubmitSuccess={()=>navigate(-1)}
+    />
   }
 
   return (
