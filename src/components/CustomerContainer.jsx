@@ -6,6 +6,7 @@ import {getCustomersByDni} from "../selectors/customers";
 import CustomerEdit from "./CustomerEdit";
 import CustomerData from "./CustomerData";
 import * as actions from "../actions/fetchCustomers";
+import {updateCustomer} from "../actions/updateCustomer";
 
 
 const CustomerContainer = () => {
@@ -17,13 +18,16 @@ const CustomerContainer = () => {
   const {dni} = useParams()
   const currentCustomer = useSelector(state => getCustomersByDni(state, dni))
 
-useEffect(()=>{
-  if (!currentCustomer){
-    dispatch(actions.fetchCustomers())
-  }
-}, [dispatch])
+  useEffect(() => {
+    if (!currentCustomer) {
+      dispatch(actions.fetchCustomers())
+    }
+  }, [dispatch])
+
   const handleSubmit = values => {
     console.log(JSON.stringify(values))
+    const {id} = values
+    dispatch(updateCustomer(id, values))
   }
 
   const handleOnBack = () => {
