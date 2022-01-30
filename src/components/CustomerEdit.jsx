@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
 import CustomersActions from "./CustomersActions";
+//import {usePrompt} from "react-router-dom";
 
 const isRequired = value => (
   !value && 'Field is required'
@@ -28,7 +29,7 @@ const validate = (values) => {
 const toNumber = value => value && Number(value)
 const toUpper = value => value && value.toUpperCase()
 const toLower = value => value && value.toLowerCase()
-const onlyGrow = (value, prev, values) => value && prev && (value > prev ? value : prev)
+const onlyGrow = (value, prev, values) => value && (!prev ? value : (value > prev ? value : prev))
 
 const MyField = ({input, meta, type, label, name}) => (
   <div>
@@ -42,8 +43,9 @@ const MyField = ({input, meta, type, label, name}) => (
   </div>
 )
 
-const CustomerEdit = ({handleSubmit, submitting, onBack}) => {
+const CustomerEdit = ({handleSubmit, submitting, onBack, pristine, submitSucceeded}) => {
   console.count('Test')
+  //usePrompt('Data wil be lost of you continue', !pristine && !submitSucceeded)
   return (
     <div>
       <h2>Customer Edit</h2>
@@ -75,6 +77,7 @@ const CustomerEdit = ({handleSubmit, submitting, onBack}) => {
           <button type='submit' disabled={submitting}>Submit</button>
           <button type='button' onClick={onBack}>Cancel</button>
         </CustomersActions>
+
       </form>
     </div>
   );

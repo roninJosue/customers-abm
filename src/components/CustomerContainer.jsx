@@ -7,6 +7,7 @@ import CustomerEdit from "./CustomerEdit";
 import CustomerData from "./CustomerData";
 import * as actions from "../actions/fetchCustomers";
 import {updateCustomer} from "../actions/updateCustomer";
+import {SubmissionError} from "redux-form";
 
 
 const CustomerContainer = () => {
@@ -25,13 +26,16 @@ const CustomerContainer = () => {
   }, [dispatch])
 
   const handleSubmit = values => {
-    console.log(JSON.stringify(values))
     const {id} = values
     return dispatch(updateCustomer(id, values))
+      .then(r => {
+        if (r.payload && r.payload.error) {
+          throw new SubmissionError(r.payload.error)
+        }
+      })
   }
 
   const handleOnBack = () => {
-    //navigate('/customers')
     navigate(-1)
   }
 
@@ -41,7 +45,7 @@ const CustomerContainer = () => {
       {...currentCustomer}
       onSubmit={handleSubmit}
       onBack={handleOnBack}
-      onSubmitSuccess={()=>navigate(-1)}
+      onSubmitSuccess={() => navigate(-1)}
     />
   }
 
