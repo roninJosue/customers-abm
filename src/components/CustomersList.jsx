@@ -8,7 +8,7 @@ const CustomersList = ({customers, urlPath}) => {
       <div className="customers-list">
         {customers.map((customer) => (
           <CustomerListItem
-            key={customer.dni}
+            key={customer.id}
             dni={customer.dni}
             urlPath={urlPath}
             editAction='Edit'

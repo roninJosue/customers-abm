@@ -12,8 +12,10 @@ const CustomersContainer = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(actions.fetchCustomers())
-  }, [dispatch])
+    if (customers.length === 0) {
+      dispatch(actions.fetchCustomers())
+    }
+  }, [dispatch, customers])
 
   const navigate = useNavigate()
   const handleAddNew = () => {
