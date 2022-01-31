@@ -12,3 +12,16 @@ export const apiPut = (url, id, customer) => () =>
       }
       return r
     })
+
+export const apiPost = (url, customer) => () =>
+  fetch(`${url}`, {
+    method: 'POST',
+    body: JSON.stringify(customer),
+    headers: new Headers({'Content-type': 'application/json'})
+  }).then(res => res.json())
+    .then(r => {
+      if (r.error) {
+        return ({error: r.validation})
+      }
+      return r
+    })

@@ -2,16 +2,20 @@ import React from 'react';
 import Frame from "./Frame";
 import CustomerEdit from "./CustomerEdit";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {insertCustomer} from "../actions/insertCustomer";
+import {SubmissionError} from "redux-form";
 
 const NewCustomerContainer = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleSubmit = () => {
-
-  }
-
-  const handleSubmitSuccess = () => {
-
+  const handleSubmit = values => {
+    return dispatch(insertCustomer(values)).then(r => {
+      if (r.payload && r.payload.error) {
+        throw new SubmissionError(r.payload.error)
+      }
+    })
   }
 
   const handleOnBack = () => {
@@ -21,7 +25,7 @@ const NewCustomerContainer = () => {
   const renderBody = () => {
     return <CustomerEdit
       onSubmit={handleSubmit}
-      obSubmitSuccess={handleSubmitSuccess}
+      onSubmitSuccess={() => navigate(-1)}
       onBack={handleOnBack}
     />
   }
