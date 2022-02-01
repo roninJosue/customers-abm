@@ -15,6 +15,7 @@ function App() {
         <Route path='/customers/:dni' element={<CustomerContainer />}/>
         <Route path='/customers/:dni/edit' element={<CustomerContainer />}/>
         <Route path='/customers/new' element={<NewCustomerContainer />} />
+        <Route path='/customers/:dni/del' element={<CustomerContainer />} />
         <Route path='*' element={notFound()} />
       </Routes>
     </Router>

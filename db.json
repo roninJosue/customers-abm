@@ -4,7 +4,8 @@
       "id": "121212",
       "dni": "121212",
       "name": "REYNALDO CANO",
-      "age": 34
+      "age": 6,
+      "isDelete": false
     },
     {
       "id": "121214",

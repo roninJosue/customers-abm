@@ -8,12 +8,14 @@ import CustomerData from "./CustomerData";
 import * as actions from "../actions/fetchCustomers";
 import {updateCustomer} from "../actions/updateCustomer";
 import {SubmissionError} from "redux-form";
+import {deleteCustomer} from "../actions/deleteCustomer";
 
 
 const CustomerContainer = () => {
 
   const {pathname} = useLocation()
   const isEdit = pathname.includes('edit')
+  const isDelete = pathname.includes('del')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {dni} = useParams()
@@ -39,6 +41,12 @@ const CustomerContainer = () => {
     navigate(-1)
   }
 
+  const handleDelete = id => {
+    dispatch(deleteCustomer(id)).then(r=>{
+      navigate(-1)
+    })
+  }
+
   const renderBody = () => {
     const Customer = isEdit ? CustomerEdit : CustomerData
     return <Customer
@@ -46,6 +54,8 @@ const CustomerContainer = () => {
       onSubmit={handleSubmit}
       onBack={handleOnBack}
       onSubmitSuccess={() => navigate(-1)}
+      isDelete={isDelete}
+      onDelete={handleDelete}
     />
   }
 

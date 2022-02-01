@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CustomersActions from "./CustomersActions";
 import {useNavigate} from "react-router-dom";
 
-const CustomerData = ({name, dni, age}) => {
+const CustomerData = ({id, name, dni, age, onDelete, isDelete = false}) => {
   const navigate = useNavigate()
   return (
     <div>
@@ -14,7 +14,8 @@ const CustomerData = ({name, dni, age}) => {
         <div><strong>Age</strong><i>{age}</i></div>
       </div>
       <CustomersActions>
-        <button onClick={()=>navigate(-1)}>Back</button>
+        <button onClick={() => navigate(-1)}>Back</button>
+        {isDelete && <button onClick={() => onDelete(id)}>Delete</button>}
       </CustomersActions>
     </div>
   );

@@ -6,12 +6,7 @@ export const apiPut = (url, id, customer) => () =>
     body: JSON.stringify(customer),
     headers: new Headers({'Content-type': 'application/json'})
   }).then(res => res.json())
-    .then(r => {
-      if (r.error) {
-        return ({error: r.validation})
-      }
-      return r
-    })
+    .then(r => handleError(r))
 
 export const apiPost = (url, customer) => () =>
   fetch(`${url}`, {
@@ -19,9 +14,23 @@ export const apiPost = (url, customer) => () =>
     body: JSON.stringify(customer),
     headers: new Headers({'Content-type': 'application/json'})
   }).then(res => res.json())
+    .then(r => handleError(r))
+
+export const apiDelete = (url, id) => () =>
+  fetch(`${url}${id}`, {
+    method: 'DELETE'
+  })
+    .then(res => res.json())
     .then(r => {
       if (r.error) {
         return ({error: r.validation})
       }
-      return r
+      return id
     })
+
+const handleError = (res) => {
+  if (res.error) {
+    return ({error: res.validation})
+  }
+  return res
+}
